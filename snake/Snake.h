@@ -1,21 +1,19 @@
 #pragma once
-#include "food.h"
+#include "Window.h"
 
-class Player
-{
+class SnakePart {
 public:
-	sf::RectangleShape head;
-	float vx = 0, vy = 0;
-	Player()
-	{
+	sf::RectangleShape shape;
+	SnakePart() {
 		x = y = 0;
+		vx = vy = 0;
 		dir = 0;
-		head.setSize(sf::Vector2f(size, size));
-		head.setFillColor(sf::Color::Green);
-		head.setOrigin(size / 2, size / 2);
+		size = speed = 10;
+		shape.setSize(sf::Vector2f(size, size));
+		shape.setFillColor(sf::Color::Green);
+		shape.setOrigin(size / 2, size / 2);
 	}
-	~Player()
-	{
+	~SnakePart() {
 
 	}
 	void setDirection(int a)
@@ -28,64 +26,46 @@ public:
 	}
 	void move(int dir)
 	{
-		switch (dir)
-		{
-		case 1: // up
-		{
-			vx = 0;
-			vy = -speed;
-			x = head.getPosition().x + vx;
-			y = head.getPosition().y + vy;
-			head.setPosition(x, y);
-			break;
+		switch (dir) {
+			case 1: // up
+			{
+				vx = 0;
+				vy = -speed;
+				break;
+			}
+			case 2: // down
+			{
+				vx = 0;
+				vy = speed;
+				break;
+			}
+			case 3: // left
+			{
+				vx = -speed;
+				vy = 0;
+				break;
+			}
+			case 4: // right
+			{
+				vx = speed;
+				vy = 0;
+				break;
+			}
+			default: {
+				vx = 0;
+				vy = 0;
+				break;
+			}
 		}
-		case 2: // down
-		{
-			vx = 0;
-			vy = speed;
-			x = head.getPosition().x + vx;
-			y = head.getPosition().y + vy;
-			head.setPosition(x, y);
-			break;
-		}
-		case 3: // left
-		{
-			vx = -speed;
-			vy = 0;
-			x = head.getPosition().x + vx;
-			y = head.getPosition().y + vy;
-			head.setPosition(x, y);
-			break;
-		}
-		case 4: // right
-		{
-			vx = speed;
-			vy = 0;
-			x = head.getPosition().x + vx;
-			y = head.getPosition().y + vy;
-			head.setPosition(x, y);
-			break;
-		}
-		}
+		x = shape.getPosition().x + vx;
+		y = shape.getPosition().y + vy;
+		shape.setPosition(x, y);
 	}
-	bool collision(sf::CircleShape shape)
+	bool inBorder(sf::RectangleShape border)
 	{
-		sf::FloatRect bordshape = shape.getGlobalBounds();
-		sf::FloatRect bordhead = head.getGlobalBounds();
-		if (bordhead.intersects(bordshape))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	bool inBorder(sf::RectangleShape shape)
-	{
-		sf::FloatRect bord = shape.getGlobalBounds();
-		sf::FloatRect bordhead = head.getGlobalBounds();
-		if (bordhead.intersects(bord))
+		sf::FloatRect bord = border.getGlobalBounds();
+		sf::FloatRect shapeBord = shape.getGlobalBounds();
+		if (shapeBord.intersects(bord))
 		{
 			return false;
 		}
@@ -95,126 +75,5 @@ public:
 		}
 	}
 protected:
-	float size = 10;
-	float speed = 10;
-private:
-	int dir = 0;
-	float x;
-	float y;
-};
-
-class Body : public Player
-{
-public:
-	sf::RectangleShape body;
-	Body()
-	{
-		x = y = 0;
-		dir = 0;
-		body.setSize(sf::Vector2f(size, size));
-		body.setFillColor(head.getFillColor());
-		body.setOrigin(size / 2, size / 2);
-	}
-	~Body()
-	{
-
-	}
-
-	void spawn(int dir, sf::RectangleShape shape)
-	{
-		switch (dir)
-		{
-		case 1: // up
-		{
-			vx = 0;
-			vy = speed;
-			x = shape.getPosition().x + vx;
-			y = shape.getPosition().y + vy;
-			this->body.setPosition(x, y);
-			break;
-		}
-		case 2: // down
-		{
-			vx = 0;
-			vy = -speed;
-			x = shape.getPosition().x + vx;
-			y = shape.getPosition().y + vy;
-			this->body.setPosition(x, y);
-			break;
-		}
-		case 3: // left
-		{
-			vx = speed;
-			vy = 0;
-			x = shape.getPosition().x + vx;
-			y = shape.getPosition().y + vy;
-			this->body.setPosition(x, y);
-			break;
-		}
-		case 4: // right
-		{
-			vx = -speed;
-			vy = 0;
-			x = shape.getPosition().x + vx;
-			y = shape.getPosition().y + vy;
-			this->body.setPosition(x, y);
-			break;
-		}
-		}
-	}
-	void move(int dir)
-	{
-		switch (dir)
-		{
-		case 1: // up
-		{
-			vx = 0;
-			vy = -speed;
-			x += vx;
-			y += vy;
-			this->body.setPosition(x, y);
-			break;
-		}
-		case 2: // down
-		{
-			vx = 0;
-			vy = speed;
-			x += vx;
-			y += vy;
-			this->body.setPosition(x, y);
-			break;
-		}
-		case 3: // left
-		{
-			vx = -speed;
-			vy = 0;
-			x += vx;
-			y += vy;
-			this->body.setPosition(x, y);
-			break;
-		}
-		case 4: // right
-		{
-			vx = speed;
-			vy = 0;
-			x += vx;
-			y += vy;
-			this->body.setPosition(x, y);
-			break;
-		}
-		}
-	}
-	Body* pushback(Body* nowel, int count)
-	{
-		Body* temp = new Body[count];
-		for (int i = 0; i < count - 1; i++)
-		{
-			temp[i] = nowel[i];
-		}
-		return temp;
-	}
-private:
-	int dir = 0;
-	float x;
-	float y;
+	int vx, vy, size, speed, dir, x, y;
 };

@@ -1,4 +1,7 @@
-C:\Users\mergo\source\repos\snake\snake\food.cpp;C:\Users\mergo\source\repos\snake\snake\Debug\food.obj
+C:\Users\mergo\source\repos\snake\snake\Body.cpp;C:\Users\mergo\source\repos\snake\snake\Debug\Body.obj
+C:\Users\mergo\source\repos\snake\snake\Game.cpp;C:\Users\mergo\source\repos\snake\snake\Debug\Game.obj
+C:\Users\mergo\source\repos\snake\snake\GameScreen.cpp;C:\Users\mergo\source\repos\snake\snake\Debug\GameScreen.obj
+C:\Users\mergo\source\repos\snake\snake\Head.cpp;C:\Users\mergo\source\repos\snake\snake\Debug\Head.obj
 C:\Users\mergo\source\repos\snake\snake\Main.cpp;C:\Users\mergo\source\repos\snake\snake\Debug\Main.obj
+C:\Users\mergo\source\repos\snake\snake\MenuScreen.cpp;C:\Users\mergo\source\repos\snake\snake\Debug\MenuScreen.obj
 C:\Users\mergo\source\repos\snake\snake\Snake.cpp;C:\Users\mergo\source\repos\snake\snake\Debug\Snake.obj
-C:\Users\mergo\source\repos\snake\snake\Window.cpp;C:\Users\mergo\source\repos\snake\snake\Debug\Window.obj

@@ -1,32 +1,31 @@
 #pragma once
 #include "Window.h"
-#include <cstdlib>
 
-class Obj
+class Food
 {
 public:
-	sf::CircleShape food;
-	Obj()
+	sf::CircleShape foodShape;
+	Food()
 	{
-		food.setRadius(rad);
-		food.setFillColor(sf::Color::Red);
-		food.setOrigin(rad, rad);
+		foodShape.setRadius(rad);
+		foodShape.setFillColor(sf::Color::Red);
+		foodShape.setOrigin(rad, rad);
 	}
-	~Obj()
+	~Food()
 	{
 
 	}
 	void spawn(sf::RectangleShape field)
 	{
 		int x = RandX(), y = RandY();
-		sf::FloatRect fieldborder = field.getGlobalBounds();
+		sf::FloatRect fieldBorder = field.getGlobalBounds();
 		while (true)
 		{
-			if ((fieldborder.contains(x + rad, y + rad)) && (fieldborder.contains(x + rad, y - rad))
-				&& (fieldborder.contains(x - rad, y + rad)) && (fieldborder.contains(x - rad, y - rad))
+			if ((fieldBorder.contains(x + rad, y + rad)) && (fieldBorder.contains(x + rad, y - rad))
+				&& (fieldBorder.contains(x - rad, y + rad)) && (fieldBorder.contains(x - rad, y - rad))
 				&& (x % 10 == 0) && (y % 10 == 0))
 			{
-				food.setPosition(x, y);
+				foodShape.setPosition(x, y);
 				x = 0;
 				y = 0;
 				break;
@@ -42,10 +41,10 @@ private:
 	float rad = 5;
 	int RandX()
 	{
-		return 0 + rand() % (1200 - 0);
+		return 0 + rand() % (width - 0);
 	}
 	int RandY()
 	{
-		return 0 + rand() % (600 - 0);
+		return 0 + rand() % (height - 0);
 	}
 };

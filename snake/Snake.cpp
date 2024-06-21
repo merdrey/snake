@@ -1,5 +1,4 @@
-#include "Snake.h"
-
+#include "Window.h"
 
 inline int direction()
 {
@@ -26,9 +25,9 @@ inline int direction()
 }
 
 
-inline bool notFree(sf::RectangleShape head, sf::RectangleShape tail, int dir)
+inline bool notFree(sf::RectangleShape headShape, sf::RectangleShape tail, int dir)
 {
-	float dx = head.getPosition().x - tail.getPosition().x, dy = head.getPosition().y - tail.getPosition().y;
+	float dx = headShape.getPosition().x - tail.getPosition().x, dy = headShape.getPosition().y - tail.getPosition().y;
 	switch (dir)
 	{
 	case 1: // head is lower
